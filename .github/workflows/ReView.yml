@@ -1,0 +1,29 @@
+name: Building PDF
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  Setup:
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo Setup
+
+  buildPDF:
+    name: Re:VIEW Workflow PDF
+    runs-on: ubuntu-latest
+    needs: Setup
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker run -t --rm -v $(pwd):/book vvakame/review:3.2 /bin/bash -ci "cd /book && yarn && yarn build"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cobain.pdf
+          path: .review/寒川のカートコバーン.pdf
+          if-no-files-found: error
+          retention-days: 90
