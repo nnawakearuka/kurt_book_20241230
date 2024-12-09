@@ -37,7 +37,8 @@
       "preface.re"
     ],
     "CHAPS": [
-      "chap-sample.md"
+      "chap-sample.md",
+      "chap-kurt.md"
     ],
     "POSTDEF": [
       "contributors.re",
